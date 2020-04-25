@@ -21,14 +21,20 @@ namespace Practica_4
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            toolTip1.SetToolTip(button3, "Editar los valores del vector directamente,dando doble click en cada celda.");
             Vectors vectorImp = new Vectors(); //crear objeto de la clase vector
             vectorImp.vectorMain(); //llamar método main
             label9.Text = "Cantidad de posiciones: " + vectorImp.x.ToString(); //mostrar cantidad de posiciones del vector
             aleatorio.Maximum = Form1.x1;
             pos1.Maximum = Form1.x1;
             pos2.Maximum = Form1.x1;
+            cellPos.Maximum = Form1.x1;
 
+            if (Form1.fill == true)
+            {
+                proceed = true;
+                displayOptions();
+            }
 
         }
 
@@ -39,14 +45,16 @@ namespace Practica_4
 
         Image no = Practica_4.Properties.Resources.no;
         Image yes = Practica_4.Properties.Resources.yes;
+        bool proceed = false;
 
         private void button2_Click(object sender, EventArgs e) //comprobaciones
         {
+
             int errorVar=-1;
             try
             {
-                bool proceed=false;
-                int test;
+
+                float test;
                 for (int i = 0; i < Form1.x1; i++)
                 {
                     errorVar = i;
@@ -65,7 +73,7 @@ namespace Practica_4
                             refillEmptyCells("0");
                         }
                     }
-                    if (int.TryParse(vector1.Rows[0].Cells[i].Value.ToString().Trim(), out test) == false)
+                    if (float.TryParse(vector1.Rows[0].Cells[i].Value.ToString().Trim(), out test) == false)
                     {
                         MessageBox.Show("Por favor, ingrese un número en la posición " + (i + 1) + " del vector.");
                         vector1.Rows[0].Cells[i].Value = "";
@@ -77,15 +85,7 @@ namespace Practica_4
                         proceed = true;
                     }
                 }
-                if (proceed == true)
-                {
-                    readyCheck.BackgroundImage = yes; //cambiar imagen de chequeo a listo
-                    vector1.Enabled = false;
-                    panel1.Enabled = true;
-                    button2.Enabled = false;
-                    button2.BackColor = Color.Gray;
-                    proceed = false;
-                }
+                displayOptions();
             }
             catch
             {
@@ -106,7 +106,23 @@ namespace Practica_4
 
         }
 
-        private void refillEmptyCells(string fill) //llenar los nulos
+        private void displayOptions() //mostrar las opciones de modificación del vector
+        {
+            if (proceed == true)
+            {
+                button3.Enabled = true;
+                button3.BackColor = Color.LightSkyBlue;
+                readyCheck.BackgroundImage = yes; //cambiar imagen de chequeo a listo
+                vector1.ReadOnly = true;
+                panel3.Enabled = true;
+                panel1.Enabled = true;
+                button2.Enabled = false;
+                button2.BackColor = Color.Gray;
+                proceed = false;
+            }
+        }
+
+        private void refillEmptyCells(string fill) //llenar los espacios vacíos
         {
             for (int i = 0; i < Form1.x1;i++)
             {
@@ -166,10 +182,13 @@ namespace Practica_4
 
         private void button3_Click(object sender, EventArgs e) //habilitar edición y deshabilitar panel
         {
-            vector1.Enabled = true;
+            button3.Enabled = false;
+            vector1.ReadOnly = false;
+            panel3.Enabled = false;
             panel1.Enabled = false;
             button2.Enabled = true;
             button2.BackColor = Color.Lime;
+            button3.BackColor = Color.Gray;
         }
 
         
@@ -243,15 +262,15 @@ namespace Practica_4
 
         private int minimum(int x) //encontrar el menor
         {
-            int menor = int.Parse(vector1.Rows[0].Cells[x].Value.ToString());
+            float menor = float.Parse(vector1.Rows[0].Cells[x].Value.ToString());
             int posMenor=x;
             int m = Form1.x1;
 
             for (int i = (x + 1); i < m; i++)
             {
-                if (menor > int.Parse(vector1.Rows[0].Cells[i].Value.ToString()))
+                if (menor > float.Parse(vector1.Rows[0].Cells[i].Value.ToString()))
                 {
-                    menor = int.Parse(vector1.Rows[0].Cells[i].Value.ToString());
+                    menor = float.Parse(vector1.Rows[0].Cells[i].Value.ToString());
                     posMenor = i;
                 }
             }
@@ -270,6 +289,13 @@ namespace Practica_4
                 vector1.Rows[0].Cells[i].Value = vector1.Rows[0].Cells[a].Value.ToString();
                 vector1.Rows[0].Cells[a].Value = aux;
             }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            int posC = (int)cellPos.Value-1;
+            string newPos = newCell.Value.ToString();
+            vector1.Rows[0].Cells[posC].Value = newPos;
         }
     }
 }

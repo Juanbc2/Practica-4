@@ -81,11 +81,26 @@ namespace Practica_4
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             Form2 fm2 = new Form2();
             this.Close();
             fm2.Close();
         }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            Size size = new Size(40,40);
+            pictureBox1.Size = size;
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            Size size = new Size(30,30);
+            pictureBox1.Size = size;
+        }
+
     }
 }

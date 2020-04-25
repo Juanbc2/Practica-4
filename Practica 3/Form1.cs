@@ -31,14 +31,14 @@ namespace Practica_4
             else
             {
                 Form2 frm2 = new Form2(); //objeto form2 para abrir la forma 2
-                DialogResult dr = MessageBox.Show("Desea rellenar el vector manualmente?","Aviso", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show("¿Desea rellenar el vector manualmente?","Aviso", MessageBoxButtons.YesNo);
                 switch (dr) //switch para rellenar o no
                 {
-                    case DialogResult.Yes:
+                    case DialogResult.No:
                         fill = true;
                         frm2.ShowDialog();
                         break;
-                    case DialogResult.No:
+                    case DialogResult.Yes:
                         fill = false;
                         frm2.ShowDialog();
                         break;
@@ -53,7 +53,6 @@ namespace Practica_4
         {
             if(e.KeyCode == Keys.Enter)
             {
-
                 x1 = (int)numericUpDown1.Value; //input del usuario
 
                 if (x1 <= 0)
@@ -63,16 +62,16 @@ namespace Practica_4
                 else
                 {
                     Form2 frm2 = new Form2(); //objeto form2 para abrir la forma 2
-                    DialogResult dr = MessageBox.Show("Desea rellenar el vector manualmente?", "Aviso", MessageBoxButtons.YesNo);
+                    DialogResult dr = MessageBox.Show("¿Desea rellenar el vector manualmente?", "Aviso", MessageBoxButtons.YesNo);
                     switch (dr) //switch para rellenar o no
                     {
-                        case DialogResult.Yes:
-                            frm2.ShowDialog();
-                            fill = true;
-                            break;
                         case DialogResult.No:
+                            fill = true;
                             frm2.ShowDialog();
+                            break;
+                        case DialogResult.Yes:
                             fill = false;
+                            frm2.ShowDialog();
                             break;
                     }
 

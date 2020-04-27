@@ -19,7 +19,7 @@ namespace Practica_4
             InitializeComponent();
         }
 
-        public void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e) //botón graficar
         {
             
             x1 = (int)numericUpDown1.Value; //input del usuario
@@ -49,7 +49,7 @@ namespace Practica_4
 
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e) //validar al apretar Enter
         {
             if(e.KeyCode == Keys.Enter)
             {
@@ -82,8 +82,10 @@ namespace Practica_4
         }
 
 
+        //-----------------------Cosas estéticas------------------------//
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+
+        private void pictureBox1_Click(object sender, EventArgs e) 
         {
             Form2 fm2 = new Form2();
             this.Close();

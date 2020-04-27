@@ -85,30 +85,5 @@ namespace Practica_4
             return vector; //devuelve el vector lleno 
         }
 
-        private int[] intercambioPosicion(int[] vectorIn, int x, int y) //intercambiar posición
-        {
-	        int dato = vectorIn[x];
-	        vectorIn[x]=vectorIn[y];
-	        vectorIn[y]=dato;
-	        return (vectorIn);
-        }
-
-        private string showArray(int[] vectorSA,int limit) //añadir vector a un string
-        {
-            string vectorStr = "";
-            for(int i=0;i<limit;i++)
-            {
-                if (i < limit - 1)
-                {
-                vectorStr = vectorStr + vectorSA[i].ToString()+",";
-                }
-                else
-                {
-                vectorStr = vectorStr + vectorSA[i].ToString() + ".";
-                }
-
-            }
-            return vectorStr;
-        }
     }
 }
